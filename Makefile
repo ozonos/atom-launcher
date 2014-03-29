@@ -2,7 +2,7 @@
 
 UUID = nos-dash@numixproject.org
 BASE_MODULES = extension.js stylesheet.css metadata.json LICENSE.md README.md
-EXTRA_MODULES = 
+EXTRA_MODULES = freqView.js
 TOLOCALIZE =  
 INSTALLBASE = ~/.local/share/gnome-shell/extensions
 INSTALLNAME = nos-dash@numixproject.org
