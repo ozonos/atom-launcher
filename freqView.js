@@ -85,8 +85,9 @@ const FreqAllView = new Lang.Class({
         this._panning = false;
         this._clickAction = new Clutter.ClickAction();
         this._clickAction.connect('clicked', Lang.bind(this, function() {
-            if (!this._currentPopup)
+            if (!this._currentPopup){
                 return;
+            }
 
             let [x, y] = this._clickAction.get_coords();
             let actor = global.stage.get_actor_at_pos(Clutter.PickMode.ALL, x, y);
