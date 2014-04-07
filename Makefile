@@ -1,11 +1,11 @@
 # Basic Makefile
 
-UUID = nos-dash@numixproject.org
+UUID = atom-dash@numixproject.org
 BASE_MODULES = extension.js stylesheet.css metadata.json LICENSE.md README.md
 EXTRA_MODULES = freqView.js
 TOLOCALIZE =  
 INSTALLBASE = ~/.local/share/gnome-shell/extensions
-INSTALLNAME = nos-dash@numixproject.org
+INSTALLNAME = atom-dash@numixproject.org
 
 all: extension
 
@@ -14,7 +14,7 @@ clean:
 
 extension: ./schemas/gschemas.compiled
 
-./schemas/gschemas.compiled: ./schemas/org.gnome.shell.extensions.nos-dash.gschema.xml
+./schemas/gschemas.compiled: ./schemas/org.gnome.shell.extensions.atom-dash.gschema.xml
 	glib-compile-schemas ./schemas/
 
 install: install-local
@@ -44,7 +44,7 @@ _build: all
 		lf=_build/locale/`basename $$l .mo`; \
 		mkdir -p $$lf; \
 		mkdir -p $$lf/LC_MESSAGES; \
-		cp $$l $$lf/LC_MESSAGES/nos-dash.mo; \
+		cp $$l $$lf/LC_MESSAGES/atom-dash.mo; \
 	done;
 
 
