@@ -320,11 +320,7 @@ const FreqAllView = new Lang.Class({
     },
 
     addFolder: function(dir) {
-        let folderIcon = this._addItem(dir);
-        this._folderIcons.push(folderIcon);
-        if (folderIcon)
-            folderIcon.actor.connect('key-focus-in',
-                                     Lang.bind(this, this._ensureIconVisible));
+        AppDisplay._loadCategory(dir, this);
     },
 
     addFolderPopup: function(popup) {
