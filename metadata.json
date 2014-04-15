@@ -1,6 +1,7 @@
 {
     "shell-version": ["3.10", "3.12"],
-    "uuid": "atom-dash@numixproject.org",
-    "name": "Atom dash",
-    "description": "Custom dash for Atom desktop"
+    "uuid": "atom-dash@ozonos.org",
+    "name": "Atom Dash",
+    "description": "Custom Dash for Ozon Desktop"
 }
+
