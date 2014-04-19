@@ -1,4 +1,4 @@
-Atom Overview
+Atom Launcher
 =========
 
-A simplified overview with applications sorted by frequency of use
+A simplified App Launcher with applications sorted by frequency of use

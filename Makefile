@@ -1,11 +1,11 @@
 # Basic Makefile
 
-UUID = atom-overview@ozonos.org
+UUID = atom-launcher@ozonos.org
 BASE_MODULES = extension.js stylesheet.css metadata.json LICENSE.md README.md
 EXTRA_MODULES = freqView.js
 TOLOCALIZE =  
 INSTALLBASE = ~/.local/share/gnome-shell/extensions
-INSTALLNAME = atom-overview@ozonos.org
+INSTALLNAME = atom-launcher@ozonos.org
 
 all: extension
 
@@ -14,7 +14,7 @@ clean:
 
 extension: ./schemas/gschemas.compiled
 
-./schemas/gschemas.compiled: ./schemas/org.gnome.shell.extensions.atom-overview.gschema.xml
+./schemas/gschemas.compiled: ./schemas/org.gnome.shell.extensions.atom-launcher.gschema.xml
 	glib-compile-schemas ./schemas/
 
 install: install-local
