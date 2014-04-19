@@ -1,4 +1,4 @@
-Atom dash
+Atom Launcher
 =========
 
-A simplified dash with applications sorted by frequency of use
+A simplified App Launcher with applications sorted by frequency of use
