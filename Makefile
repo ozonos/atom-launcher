@@ -1,11 +1,11 @@
 # Basic Makefile
 
-UUID = atom-dash@ozonos.org
+UUID = atom-overview@ozonos.org
 BASE_MODULES = extension.js stylesheet.css metadata.json LICENSE.md README.md
 EXTRA_MODULES = freqView.js
 TOLOCALIZE =  
 INSTALLBASE = ~/.local/share/gnome-shell/extensions
-INSTALLNAME = atom-dash@ozonos.org
+INSTALLNAME = atom-overview@ozonos.org
 
 all: extension
 
@@ -14,7 +14,7 @@ clean:
 
 extension: ./schemas/gschemas.compiled
 
-./schemas/gschemas.compiled: ./schemas/org.gnome.shell.extensions.atom-dash.gschema.xml
+./schemas/gschemas.compiled: ./schemas/org.gnome.shell.extensions.atom-overview.gschema.xml
 	glib-compile-schemas ./schemas/
 
 install: install-local
