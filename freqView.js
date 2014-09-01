@@ -193,6 +193,31 @@ const FreqAllView = new Lang.Class({
         this._grid.closeExtraSpace();
     },
 
+    _loadApps: function() {
+        this.loadGrid();        
+
+        let apps = Gio.AppInfo.get_all().filter(function(appInfo) {
+            return appInfo.should_show();
+        }).map(function(app) {
+            return app.get_id();
+        });
+        
+        let allApps = [];
+        apps.forEach(Lang.bind(this, function(appId) {
+            let app = Shell.AppSystem.get_default().lookup_app(appId);
+            let icon = new AppDisplay.AppIcon(app);
+            
+            this.addItem(icon);
+        }));
+
+        this._allItems.sort(Lang.bind(this, this._compareItems));
+        this._allItems.forEach(Lang.bind(this, function(icon) {
+            if(!this._isFreq(icon, this._usage.get_most_used(""))) {
+                this._grid.addItem(icon);
+            }
+        }));
+    },
+
     _onScroll: function(actor, event) {
         if (this._displayingPopup)
             return true;
@@ -267,7 +292,7 @@ const FreqAllView = new Lang.Class({
 
     _isFreq: function(item, mostUsed){
         for (var app in mostUsed) {
-            if (mostUsed[app].get_name() == item.get_name()){
+            if (mostUsed[app].get_name() == item.name){
                 return app;
             }
         }
@@ -278,8 +303,8 @@ const FreqAllView = new Lang.Class({
         // bit of a hack: rely on both ShellApp and GMenuTreeDirectory
         // having a get_name() method
 
-        let nameA = GLib.utf8_collate_key(itemA.get_name(), -1);
-        let nameB = GLib.utf8_collate_key(itemB.get_name(), -1);
+        let nameA = GLib.utf8_collate_key(itemA.name, -1);
+        let nameB = GLib.utf8_collate_key(itemB.name, -1);
         return (nameA > nameB) ? 1 : (nameA < nameB ? -1 : 0);
     },
 
