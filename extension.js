@@ -17,7 +17,8 @@ function enable() {
     Main.overview.viewSelector.appDisplay._views[0].view.actor.hide();
     Main.overview.viewSelector.appDisplay._viewStack.remove_actor(prevAllView.actor);
     Main.overview.viewSelector.appDisplay._viewStack.add_actor(freqAllView.actor);
-    Main.overview.viewSelector.appDisplay._redisplay();
+    Main.overview.viewSelector.appDisplay._views[0].view._redisplay();
+    Main.overview.viewSelector.appDisplay._views[1].view._redisplay();
     Main.overview.viewSelector.appDisplay._controls.hide();
 }
 
