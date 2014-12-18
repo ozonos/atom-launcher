@@ -1,6 +1,6 @@
 # Basic Makefile
 
-UUID = atom-launcher@ozonos.org
+UUID = atom-launcher\@ozonos.org
 BASE_MODULES = extension.js stylesheet.css metadata.json LICENSE.md README.md
 EXTRA_MODULES = freqView.js
 TOLOCALIZE =  
@@ -20,9 +20,9 @@ extension: ./schemas/gschemas.compiled
 install: install-local
 
 install-local: _build
-	rm -rf $(INSTALLBASE)/$(INSTALLNAME)
-	mkdir -p $(INSTALLBASE)/$(INSTALLNAME)
-	cp -r ./_build/* $(INSTALLBASE)/$(INSTALLNAME)/
+	rm -rf $(INSTALLBASE)/
+	mkdir -p $(INSTALLBASE)
+	cp -r ./_build/* $(INSTALLBASE)/
 	-rm -fR _build
 	echo done
 
