@@ -141,7 +141,8 @@ const FreqAllView = new Lang.Class({
         global.window_manager.connect('destroy', Lang.bind(this, 
             function(self, destroyed) {
                 let workspace = destroyed.meta_window.get_workspace();
-                if (global.screen.get_active_workspace() == workspace
+                if (destroyed.meta_window.window_type == Meta.WindowType.NORMAL
+                        && global.screen.get_active_workspace() == workspace
                         && workspace.list_windows().length <= 1) {
                     // If it is the last window on workspace, show apps
                     Main.overview._dash.showAppsButton.set_checked(true);
