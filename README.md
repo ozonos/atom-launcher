@@ -6,10 +6,12 @@ A custom Launcher Extension for Gnome Shell. This Extension is part of the Atom 
 
 ### Compatibility
 
-3.10	| ???
-3.12	| yes
-3.14	| yes
-3.16	| ???
+| Gnome | Compatible |
+| :---: | :---: |
+| 3.10 | ??? |
+| 3.12 | yes |
+| 3.14 | yes |
+| 3.16 | ??? |
 
 ### Installation
 
@@ -18,6 +20,7 @@ To install this extension, run the following commands in your Terminal:
 ```bash
 git clone https://github.com/ozonos/atom-launcher.git
 cd atom-launcher
+make
 make install
 ```
 
