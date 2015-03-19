@@ -126,6 +126,27 @@ const FreqAllView = new Lang.Class({
                     this._keyPressEventId = 0;
                 }
             }));
+
+        // When switching workspace, check if it is a new workspace
+        global.screen.connect('workspace-switched', Lang.bind(this, 
+            function() {
+                if (global.screen.get_active_workspace().list_windows().length == 0) {
+                    // Show apps
+                    Main.overview._dash.showAppsButton.set_checked(true);
+                } else if (Main.overview._dash.showAppsButton.checked) {
+                    Main.overview._dash.showAppsButton.set_checked(false);
+                }
+            }));
+        // Listen to window destroyed event
+        global.window_manager.connect('destroy', Lang.bind(this, 
+            function(self, destroyed) {
+                let workspace = destroyed.meta_window.get_workspace();
+                if (global.screen.get_active_workspace() == workspace
+                        && workspace.list_windows().length <= 1) {
+                    // If it is the last window on workspace, show apps
+                    Main.overview._dash.showAppsButton.set_checked(true);
+                }
+            }));
     },
 
     getCurrentPageY: function() {
