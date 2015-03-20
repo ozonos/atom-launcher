@@ -1,12 +1,11 @@
 # Basic Makefile
 
-UUID = atom-launcher\@ozonos.org
+UUID = atom-launcher@ozonos.org
 BASE_MODULES = extension.js stylesheet.css metadata.json LICENSE.md README.md
-EXTRA_MODULES = freqView.js
+EXTRA_MODULES = freqView.js convenience.js prefs.js
 TOLOCALIZE = prefs.js
 MSGSRC = $(wildcard po/*.po)
-INSTALLBASE = $(DESTDIR)/usr/share/gnome-shell/extensions/$(UUID)
-INSTALLNAME = atom-launcher@ozonos.org
+INSTALLBASE = /usr/share/gnome-shell/extensions
 
 all: extension
 
@@ -35,9 +34,9 @@ mergepo: potfile
 install: install-local
 
 install-local: _build
-	rm -rf $(INSTALLBASE)/
-	mkdir -p $(INSTALLBASE)
-	cp -r ./_build/* $(INSTALLBASE)/
+	rm -rf $(INSTALLBASE)/$(UUID)
+	mkdir -p $(INSTALLBASE)/$(UUID)
+	cp -r ./_build/* $(INSTALLBASE)/$(UUID)/
 	-rm -fR _build
 	echo done
 
