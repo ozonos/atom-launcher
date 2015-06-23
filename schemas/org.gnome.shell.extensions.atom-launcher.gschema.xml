@@ -1,3 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <schemalist gettext-domain="gnome-shell-extensions">
+	<schema path="/org/gnome/shell/extensions/atom-launcher/" id="org.gnome.shell.extensions.atom-launcher">
+		<key type="b" name="auto-show">
+			<default>true</default>
+			<summary>Auto show Atom Launcher</summary>
+			<description>Show Atom Launcher when switching to new empty workspace and closed the last window on workspace, also hides the launcher when swithcing to non-empty workspace.</description>
+		</key>
+	</schema>
 </schemalist>

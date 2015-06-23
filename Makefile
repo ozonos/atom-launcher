@@ -1,28 +1,42 @@
 # Basic Makefile
 
-UUID = atom-launcher\@ozonos.org
+UUID = atom-launcher@ozonos.org
 BASE_MODULES = extension.js stylesheet.css metadata.json LICENSE.md README.md
-EXTRA_MODULES = freqView.js
-TOLOCALIZE =  
-INSTALLBASE = $(DESTDIR)/usr/share/gnome-shell/extensions/$(UUID)
-INSTALLNAME = atom-launcher@ozonos.org
+EXTRA_MODULES = freqView.js convenience.js prefs.js
+TOLOCALIZE = prefs.js
+MSGSRC = $(wildcard po/*.po)
+INSTALLBASE = /usr/share/gnome-shell/extensions
 
 all: extension
 
 clean:
 	rm -f ./schemas/gschemas.compiled
 
-extension: ./schemas/gschemas.compiled
+extension: ./schemas/gschemas.compiled $(MSGSRC:.po=.mo)
 
 ./schemas/gschemas.compiled: ./schemas/org.gnome.shell.extensions.atom-launcher.gschema.xml
 	glib-compile-schemas ./schemas/
 
+potfile: ./po/atomlauncher.pot
+
+mergepo: potfile
+	for l in $(MSGSRC); do \
+		msgmerge -U $$1 ./po/atomlauncher.pot; \
+	done;
+
+./po/atomlauncher.pot: $(TOLOCALIZE)
+	mkdir -p po
+	xgettext -k_ -kN_ -o po/atomlauncher.pot --package-name "Atom Launcher" $(TOLOCALIZE)
+
+./po/%.mo: ./po/%.po
+	msgfmt -c $< -o $@
+
 install: install-local
 
 install-local: _build
-	rm -rf $(INSTALLBASE)/
-	mkdir -p $(INSTALLBASE)
-	cp -r ./_build/* $(INSTALLBASE)/
+	rm -rf $(INSTALLBASE)/$(UUID)
+	mkdir -p $(INSTALLBASE)/$(UUID)
+	cp -r ./_build/* $(INSTALLBASE)/$(UUID)/
 	-rm -fR _build
 	echo done
 

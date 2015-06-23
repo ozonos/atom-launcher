@@ -28,12 +28,20 @@ const Params = imports.misc.params;
 const Util = imports.misc.util;
 const AppDisplay = imports.ui.appDisplay;
 
+const Me = imports.misc.extensionUtils.getCurrentExtension();
+const Convenience = Me.imports.convenience;
+
 const FreqAllView = new Lang.Class({
     Name: 'AllView',
     Extends: AppDisplay.BaseAppView,
 
-    _init: function() {
+    _init: function(settings) {
         this.parent({ usePagination: true }, null);
+
+        // Load settings
+        this._settings = settings;
+        this._bindSettingsChanges();
+
         this._scrollView = new St.ScrollView({ style_class: 'all-apps',
                                                x_expand: true,
                                                y_expand: true,
@@ -100,10 +108,6 @@ const FreqAllView = new Lang.Class({
         this._availWidth = 0;
         this._availHeight = 0;
 
-        Main.overview.connect('hidden', Lang.bind(this,
-            function() {
-                this.goToPage(0);
-            }));
         this._grid.connect('space-opened', Lang.bind(this,
             function() {
                 this._scrollView.get_effect('fade').enabled = false;
@@ -126,6 +130,65 @@ const FreqAllView = new Lang.Class({
                     this._keyPressEventId = 0;
                 }
             }));
+
+        this._signalsHandler = new Convenience.GlobalSignalsHandler();
+        this._signalsHandler.push([
+                Main.overview,
+                'hidden',
+                Lang.bind(this, function() {
+                        this.goToPage(0);
+                    })
+            ]);
+
+        if (this._settings.get_boolean('auto-show')) {
+            this._autoShowSignalsConnect();
+        }
+    },
+
+    destroy: function() {
+        this._signalsHandler.disconnect();
+    },
+
+    _bindSettingsChanges: function() {
+        this._settings.connect('changed::auto-show', Lang.bind(this, function() {
+            global.log('auto-show changed: ' + this._settings.get_boolean('auto-show'));
+            if (this._settings.get_boolean('auto-show')) {
+                this._autoShowSignalsConnect();
+            } else {
+                this._signalsHandler.disconnectWithLabel('auto-show');
+            }
+        }));
+    },
+
+    _autoShowSignalsConnect: function() {
+        this._signalsHandler.pushWithLabel('auto-show',
+            // When switching workspace, check if it is a new workspace
+            [
+                global.screen,
+                'workspace-switched',
+                Lang.bind(this, function() {
+                    if (global.screen.get_active_workspace().list_windows().length == 0) {
+                        // Show apps
+                        Main.overview._dash.showAppsButton.set_checked(true);
+                    } else if (Main.overview._dash.showAppsButton.checked) {
+                        Main.overview._dash.showAppsButton.set_checked(false);
+                    }
+                })
+            ],
+            // Listen to window destroyed event
+            [
+                global.window_manager,
+                'destroy',
+                Lang.bind(this, function(self, destroyed) {
+                    let workspace = destroyed.meta_window.get_workspace();
+                    if (destroyed.meta_window.window_type == Meta.WindowType.NORMAL
+                            && global.screen.get_active_workspace() == workspace
+                            && workspace.list_windows().length <= 1) {
+                        // If it is the last window on workspace, show apps
+                        Main.overview._dash.showAppsButton.set_checked(true);
+                    }
+                })
+            ]);
     },
 
     getCurrentPageY: function() {

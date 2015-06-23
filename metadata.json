@@ -2,6 +2,7 @@
     "shell-version": ["3.10", "3.12", "3.14", "3.16"],
     "uuid": "atom-launcher@ozonos.org",
     "name": "Atom Launcher",
-    "description": "Custom App Laucher for the Ozon Desktop"
+    "description": "Custom App Laucher for the Ozon Desktop",
+    "gettext-domain": "atomlauncher"
 }
 
