@@ -6,10 +6,13 @@ A custom Launcher Extension for Gnome Shell. This Extension is part of the Atom 
 
 ### Compatibility
 
-3.10	| ???
-3.12	| yes
-3.14	| yes
-3.16	| ???
+3.10    |   ???
+
+3.12	|   yes
+
+3.14	|   yes
+
+3.16	|   yes
 
 ### Installation
 
