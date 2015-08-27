@@ -1,8 +1,8 @@
-# Atom Launcher
+Atom Launcher
+=========
+A custom Launcher Extension for Gnome Shell. This Extension is part of the Atom Extension Set designed for Ozon OS. 
 
-The Atom Launcher replaces the standard Gnome Shell AppView.
-
-![ozon-dash-full](https://cloud.githubusercontent.com/assets/5920259/9534496/bcdd6c78-4d10-11e5-9e69-6a3132d40bfe.png)
+- Add screenshot
 
 ### Features 
 * Show Apps sorted by frequency of use.
@@ -10,12 +10,10 @@ The Atom Launcher replaces the standard Gnome Shell AppView.
 
 ### Compatibility
 
-| Gnome | Compatible |
-| :---: | :---: |
-| 3.10 | ??? |
-| 3.12 | yes |
-| 3.14 | yes |
-| 3.16 | ??? |
+3.10	| ???
+3.12	| yes
+3.14	| yes
+3.16	| ???
 
 ### Installation
 
