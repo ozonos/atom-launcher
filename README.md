@@ -12,7 +12,7 @@ The Atom Launcher replaces the standard Gnome Shell AppView.
 
 | Gnome | Compatible |
 | :---: | :---: |
-| 3.10 | ??? |
+| 3.10 | no |
 | 3.12 | yes |
 | 3.14 | yes |
 | 3.16 | ??? |
