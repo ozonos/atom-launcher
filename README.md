@@ -4,6 +4,10 @@ The Atom Launcher replaces the standard Gnome Shell AppView.
 
 ![ozon-dash-full](https://cloud.githubusercontent.com/assets/5920259/9534496/bcdd6c78-4d10-11e5-9e69-6a3132d40bfe.png)
 
+### Features 
+* Show Apps sorted by frequency of use.
+* Removes the standard groups of "Frequent" and "All" Apps
+
 ### Compatibility
 
 | Gnome | Compatible |
